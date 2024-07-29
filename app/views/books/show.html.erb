@@ -2,7 +2,7 @@
   <p></p>
   <div class="container px-5 px-sm-0">
     <div class="row">
-      <%= render partial: 'leftcommon', locals: { user: @user, book: @book } %>
+      <%= render partial: 'leftcommon', locals: { user: @user, book: @newbook } %>
       <!-- 右側 -->
       <div class="col-md-8 offset-md-1">
         <h2>Book detail</h2>
@@ -19,15 +19,17 @@
             <tr>
               <td>
                 <%= link_to(@book.user) do %>
-                  <%= image_tag(@book.user.image.attached? ? @book.user.image : 'noimage.png', style: 'width: 100px; height: 85px;', class: 'img-fluid') %>
+                  <%= image_tag(@book.user.profile_image.attached? ? @book.user.profile_image : 'noimage.png', style: 'width: 100px; height: 85px;', class: 'img-fluid') %>
                 <% end %>
                 </br><a><%= link_to @book.user.name, @book.user %></a>
               </td>
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>
               <td>
-                <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-success btn-sm' %>
-                <%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger btn-sm' %>
+                <% if current_user == @book.user %>
+                  <%= link_to 'Edit', edit_book_path(@book), class: 'btn btn-success btn-sm' %>
+                  <%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger btn-sm' %>
+                <% end %>
               </td>
             </tr>
           </tbody>

@@ -20,7 +20,7 @@
               <tr>
                 <td>
                   <%= link_to @user do %>
-                    <%= image_tag(@user.image.attached? ? @user.image : 'noimage.png', style: 'width: 100px; height: 85px;', class: 'img-fluid') %>
+                    <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'noimage.png', style: 'width: 100px; height: 85px;', class: 'img-fluid') %>
                   <% end %>
                 </td>
                 <td><%= link_to b.title, book_path(b) %></td>

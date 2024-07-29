@@ -17,14 +17,14 @@
             <% @users.each do |u| %>
               <tr>
                 <td>
-                  <%= image_tag(u.image.attached? ? u.image : 'noimage.png', style: 'width: 120px; height: 100px;', class: 'img-fluid') %>
+                  <%= image_tag(u.profile_image.attached? ? u.profile_image : 'noimage.png', style: 'width: 120px; height: 100px;', class: 'img-fluid') %>
                 </td>
                 <td>
                   <%= u.name %>
                 </td>
                 <td>
                   <a>
-                    <%= link_to 'show', user_path(u) %>
+                    <%= link_to 'Show', user_path(u) %>
                   </a>
                 </td>
               </tr>

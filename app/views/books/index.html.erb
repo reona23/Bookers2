@@ -1,5 +1,15 @@
 <main>
   <p></p>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="container px-5 px-sm-0">
     <div class="row">
       <%= render partial: 'leftcommon', locals: { user: @user, book: @book } %>
@@ -20,7 +30,9 @@
             <% @books.each do |b| %>
               <tr>
                 <td><!-- Bookモデルに投稿したユーザーの画像（Userモデルの画像）を表示させたい-->
-                  <%= image_tag(b.user.image.attached? ? b.user.image : 'noimage.png', style: 'width: 100px; height: 100px;', class: 'img-fluid') %>
+                  <%= link_to user_path(b.user) do %>
+                    <%= image_tag(b.user.profile_image.attached? ? b.user.profile_image : 'noimage.png', style: 'width: 100px; height: 100px;', class: 'img-fluid') %>
+                  <% end %>
                 </td>
                 <td><!-- Bookモデルに投稿されたtitleカラムを表示させたい-->
                   <%= link_to b.title, book_path(b) %>

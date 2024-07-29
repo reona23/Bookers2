@@ -2,7 +2,7 @@
 <div class="col-md-3">
   <h2>User info</h2>
   <!-- ユーザーごとの画像を表示させたい（ユーザーの画像がない場合は、app/assets/images/noimage.pngを表示させる）-->
-  <%= image_tag(user.image.attached? ? user.image : 'noimage.png', class: 'img-fluid') %>
+  <%= image_tag(user.profile_image.attached? ? user.profile_image : 'noimage.png', class: 'img-fluid') %>
   <table class="table">
     <tbody>
       <tr></tr>
@@ -21,7 +21,6 @@
     </tbody>
   </table>
   <div class="row">
-    <!-- ユーザー情報の編集を行えるようにしたい。（Userモデルのeditアクションedit.html.erbに飛べるようにしたい）-->
     <%= link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do %>
       <i class="fa-solid fa-user-gear" style="color: 7d7d7d"></i>
     <% end %>
