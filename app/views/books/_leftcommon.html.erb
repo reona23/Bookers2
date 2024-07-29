@@ -1,0 +1,44 @@
+ <!-- 左側 -->
+<div class="col-md-3">
+  <h2>User info</h2>
+  <!-- ユーザーごとの画像を表示させたい（ユーザーの画像がない場合は、app/assets/images/noimage.pngを表示させる）-->
+  <%= image_tag(user.image.attached? ? user.image : 'noimage.png', class: 'img-fluid') %>
+  <table class="table">
+    <tbody>
+      <tr></tr>
+      <tr>
+        <th>name</th>
+        <td><!-- ユーザーの名前をここに表示させたい（Userモデルのnameというカラム） -->
+          <%= user.name %>
+        </td>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <td><!-- ユーザーの自己紹介（Userモデルのintroductionというカラムを表示させたい） -->
+          <%= user.introduction %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <!-- ユーザー情報の編集を行えるようにしたい。（Userモデルのeditアクションedit.html.erbに飛べるようにしたい）-->
+    <%= link_to edit_user_path(user), class: 'btn btn-outline-secondary btn-block' do %>
+      <i class="fa-solid fa-user-gear" style="color: 7d7d7d"></i>
+    <% end %>
+  </div>
+  <h2 class="mt-3">New book</h2>
+  <!-- Bookモデルのtitleカラムに入力できるようなフォームを作りたい-->
+  <%= form_with model: book, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :title, 'Title' %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body, 'Opinion' %>
+      <%= f.text_area :body, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Create Book', class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
