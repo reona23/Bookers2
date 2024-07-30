@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
   before_action :find_book
 
- def create
+  def create
     @favorite = current_user.favorites.new(book_id: @book.id)
     if @favorite.save
       redirect_back(fallback_location: root_path)
@@ -23,9 +23,5 @@ class FavoritesController < ApplicationController
 
   def find_book
     @book = Book.find(params[:book_id])
-  end
-
-  def already_favorited?
-    Favorite.where(user_id: current_user.id, book_id: params[:book_id]).exists?
   end
 end

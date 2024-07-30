@@ -35,26 +35,23 @@
                     <%= image_tag(b.user.profile_image.attached? ? b.user.profile_image : 'noimage.png', style: 'width: 100px; height: 100px;', class: 'img-fluid') %>
                   <% end %>
                 </td>
-                <td><!-- Bookモデルに投稿されたtitleカラムを表示させたい-->
+                <td>
                   <%= link_to b.title, book_path(b) %>
                 </td>
-                <td><!-- Bookモデルに投稿されたbodyカラムを表示させたい-->
+                <td>
                   <%= b.body %>
                 </td>
                 <td>
-                <% if b.favorited_by?(current_user) %>
-                  <p>
-                    <%= link_to book_favorite_path(b, b.favorites.find_by(user_id: current_user.id)), method: :delete do %>
-                      <i class="fa-solid fa-heart text-danger"></i><span class="text-danger">1</span>
+                  <% if b.favorited_by?(current_user) %>
+                    <%= link_to book_favorites_path(b), method: :delete do %>
+                      <i class="fa-solid fa-heart text-danger"></i><span class="text-danger"><%= b.favorites.count %></span>
                     <% end %>
-                  </p>
-                <% else %>
-                  <p>
+                  <% else %>
                     <%= link_to book_favorites_path(b), method: :post do %>
-                      <i class="fa-solid fa-heart text-primary"></i><span class="text-primary">0</span>
+                      <i class="fa-solid fa-heart text-primary"></i><span class="text-primary"><%= b.favorites.count %></span>
                     <% end %>
-                  </p>
-                <% end %>
+                  <% end %>
+                </td>
                 <td>
                   <p>コメント数: <%= b.book_comments.count %></p>
                 </td>
@@ -63,7 +60,6 @@
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 </main>
