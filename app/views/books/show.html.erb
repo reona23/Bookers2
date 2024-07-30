@@ -7,17 +7,7 @@
       <div class="col-md-8 offset-md-1">
         <h2>Book detail</h2>
         <table class="table table-hover table-inverse">
-          <thead>
-            <tr>
-              <th style="width: 120px; height: 50px;"></th>
-              <th>Title</th>
-              <th>Opinion</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
+
           <tbody>
             <tr>
               <td>
@@ -32,13 +22,13 @@
                 <% if @book.favorited_by?(current_user) %>
                   <p>
                     <%= link_to book_favorite_path(@book, @book.favorites.find_by(user_id: current_user.id)), method: :delete do %>
-                      <i class="fa fa-heart text-danger"></i> <span class="text-danger">1</span>
+                      <i class="fa-solid fa-heart text-danger"></i><span class="text-danger">1</span>
                     <% end %>
                   </p>
                 <% else %>
                   <p>
                     <%= link_to book_favorites_path(@book), method: :post do %>
-                      <i class="fa fa-heart-o text-primary"></i> <span class="text-primary">0</span>
+                      <i class="fa-solid fa-heart text-primary"></i><span class="text-primary">0</span>
                     <% end %>
                   </p>
                 <% end %>

@@ -1,23 +1,22 @@
 class FavoritesController < ApplicationController
   before_action :find_book
 
-  def create
-    if already_favorited?
-      flash[:notice] = "You can't favorite more than once"
+ def create
+    @favorite = current_user.favorites.new(book_id: @book.id)
+    if @favorite.save
+      redirect_back(fallback_location: root_path)
     else
-      @book.favorites.create(user_id: current_user.id)
+      redirect_back(fallback_location: root_path, alert: 'いいねに失敗しました。')
     end
-    redirect_back(fallback_location: root_path)
   end
 
   def destroy
-    if !(already_favorited?)
-      flash[:notice] = "Cannot unfavorite"
+    @favorite = current_user.favorites.find_by(book_id: @book.id)
+    if @favorite.destroy
+      redirect_back(fallback_location: root_path)
     else
-      @favorite = @book.favorites.find(params[:id])
-      @favorite.destroy
+      redirect_back(fallback_location: root_path, alert: 'いいねの削除に失敗しました。')
     end
-    redirect_back(fallback_location: root_path)
   end
 
   private
